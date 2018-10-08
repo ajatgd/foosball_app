@@ -25,7 +25,7 @@ SECRET_KEY = 'd33*p^9ihdx*asa_nl2)=#$riw6!fqsa*s!*92hlfbyrk++0ni'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['foosballapp1.herokuapp.com']
 
 
 # Application definition
