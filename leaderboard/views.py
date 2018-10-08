@@ -31,4 +31,4 @@ def games(request):
 	return render(request, 'games.html', {'games': games})
 
 def instructions(request):
-	return render(request, 'instructions.html')
+	return render(request,'instructions.html')
