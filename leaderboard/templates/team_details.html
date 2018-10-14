@@ -1,27 +1,12 @@
-<html>
-<head>
-    <title> TEAM DETAILS </title>
-    <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% extends 'base2.html' %}
+{% block content %}
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-</head>
-<body>
-  <nav class="navbar navbar-dark bg-dark">
-  <!-- Navbar content -->
-
-  <!-- Navbar content -->
-  <p align = "center"><font color="white"><h1>TEAM {{team.Team_Name}}</h1></font></p>
-</nav>
-<br>
+<h1><p align ='center'> TEAM {{team.Team_Name}}</p></h1>
 <br>
 <h3>Players Detail</h3>
 <ul>
-	<li>{{team.Player1.Player_Name}}</li>
-	<li>{{team.Player2.Player_Name}}</li>
+	<li>{{team.Player1_Name}}</li>
+	<li>{{team.Player2_Name}}</li>
 </ul>
 
 <h3>Games Played</h3>
@@ -34,12 +19,28 @@
     </tr>
   </thead><tbody>
 
-{% for score in team.score_set.all %}
+{% for ga in game %}
+{% ifequal team.Team_Name ga.team1.Team_Name %}
 <tr>
-	<th scope="row" rowspan="2">Game {{score.game_id}}</th>
-	{% for scores in score.game.score_set.all %}
-	<td>{{scores.team_id}}</td>
-	<td>{{scores.score}}</td></tr><tr>
-	{% endfor %}
-{% endfor %}</tr>
-</body></html>
+	<th scope="row" rowspan="2">Game {{ga.id}}</th>
+	<td>{{ga.team1.Team_Name}}</td>
+	<td>{{ga.team1_score}}</td>
+</tr>
+<tr>
+  <td>{{ga.team2.Team_Name}}</td>
+  <td>{{ga.team2_score}}</td>
+</tr>
+{% endifequal %}
+{% ifequal team.Team_Name ga.team2.Team_Name %}
+  <tr>
+  	<th scope="row" rowspan="2">Game {{ga.id}}</th>
+  	<td>{{ga.team1.Team_Name}}</td>
+  	<td>{{ga.team1_score}}</td>
+  </tr>
+  <tr>
+    <td>{{ga.team2.Team_Name}}</td>
+    <td>{{ga.team2_score}}</td>
+  </tr>
+  	{% endifequal %}
+{% endfor %}
+  {% endblock %}

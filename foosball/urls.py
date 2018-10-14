@@ -26,5 +26,7 @@ urlpatterns = [
     url(r'^teams/(?P<team_id>[0-9]+)/$', views.team_details),
     #url(r'^teams/3/$', views.team_details),
     url(r'^games/$', views.games),
+    url(r'^registerTeam/$',views.registerTeam),
+    url(r'^registerGame/$',views.registerGame),
     url(r'^instructions/$', views.instructions),
 ]
