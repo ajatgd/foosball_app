@@ -4,6 +4,7 @@ from django.shortcuts import *
 from .models import *
 from operator import itemgetter
 from .forms import *
+from django.db.models import Q
 
 def index(request):
 	return render(request,'index.html')
@@ -32,9 +33,13 @@ def team_list(request):
 	return render(request,'team_list.html', {'team_list': teams})
 
 def team_details(request, team_id):
-	team = RegisterTeam.objects.get(pk=team_id)
-	game = RegisterGame.objects.all()
-	return render(request, 'team_details.html', {'team': team, 'game':game})
+	try:
+	    team=RegisterTeam.objects.get(id=team_id)
+	except:
+		return render(request, 'team_list.html', {'team_list': RegisterTeam.objects.all()})
+
+	game= RegisterGame.objects.filter(Q(team2 = team)|Q(team1 = team))
+	return render(request, 'team_details.html', {'team':team,'game':game})
 
 def games(request):
 	games = RegisterGame.objects.order_by('pk').reverse()

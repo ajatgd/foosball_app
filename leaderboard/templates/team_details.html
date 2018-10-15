@@ -20,7 +20,6 @@
   </thead><tbody>
 
 {% for ga in game %}
-{% ifequal team.Team_Name ga.team1.Team_Name %}
 <tr>
 	<th scope="row" rowspan="2">Game {{ga.id}}</th>
 	<td>{{ga.team1.Team_Name}}</td>
@@ -30,17 +29,5 @@
   <td>{{ga.team2.Team_Name}}</td>
   <td>{{ga.team2_score}}</td>
 </tr>
-{% endifequal %}
-{% ifequal team.Team_Name ga.team2.Team_Name %}
-  <tr>
-  	<th scope="row" rowspan="2">Game {{ga.id}}</th>
-  	<td>{{ga.team1.Team_Name}}</td>
-  	<td>{{ga.team1_score}}</td>
-  </tr>
-  <tr>
-    <td>{{ga.team2.Team_Name}}</td>
-    <td>{{ga.team2_score}}</td>
-  </tr>
-  	{% endifequal %}
 {% endfor %}
   {% endblock %}
